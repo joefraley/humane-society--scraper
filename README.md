@@ -1,4 +1,7 @@
 # Humane Society Scraper
+
+[![CircleCI](https://circleci.com/gh/joefraley/humane-society--scraper.svg?style=svg)](https://circleci.com/gh/joefraley/humane-society--scraper)
+
 Scrape the Oregon Humane Society's results pages for data about adoptable animals.
 
 ## MIT License

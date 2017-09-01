@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm test --watch\"",
     "start": "micro",
-    "test": "ava",
+    "test": "node -v && ava",
     "watch": "nodemon --watch src/ --exec \"npm run start\""
   },
   "keywords": [],
