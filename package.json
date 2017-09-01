@@ -15,7 +15,9 @@
   "dependencies": {
     "axios": "0.16.2",
     "cheerio": "1.0.0-rc.2",
-    "micro": "8.0.3"
+    "date-fns": "1.28.5",
+    "micro": "8.0.3",
+    "ramda": "0.24.1"
   },
   "devDependencies": {
     "ava": "0.22.0",
