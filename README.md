@@ -1,6 +1,7 @@
 # Humane Society Scraper
 
 [![CircleCI](https://circleci.com/gh/joefraley/humane-society--scraper.svg?style=svg)](https://circleci.com/gh/joefraley/humane-society--scraper)
+ [![Coverage Status](https://coveralls.io/repos/github/joefraley/humane-society--scraper/badge.svg?branch=master)](https://coveralls.io/github/joefraley/humane-society--scraper?branch=master)
 
 Scrape the Oregon Humane Society's results pages for data about adoptable animals.
 

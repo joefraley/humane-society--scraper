@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run watch\" \"npm test --watch\"",
     "start": "micro",
-    "test": "node -v && ava",
+    "test": "nyc ava",
     "watch": "nodemon --watch src/ --exec \"npm run start\""
   },
   "keywords": [],
@@ -22,7 +22,9 @@
   "devDependencies": {
     "ava": "0.22.0",
     "chokidar": "1.7.0",
+    "codecov": "2.3.0",
     "eslint": "4.5.0",
-    "nodemon": "1.11.0"
+    "nodemon": "1.11.0",
+    "nyc": "11.1.0"
   }
 }
