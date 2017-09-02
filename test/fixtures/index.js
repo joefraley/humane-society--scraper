@@ -1,4 +1,4 @@
-const {merge, __} = require('ramda')
+const { merge, __ } = require("ramda");
 
 module.exports = merge(__, {
   adoptFee: "$35",
@@ -14,5 +14,5 @@ module.exports = merge(__, {
   location: "Cattery",
   name: "Aaliyah ",
   sex: "Female",
-  weight: "2.5 lbs",
-})
+  weight: "2.5 lbs"
+});

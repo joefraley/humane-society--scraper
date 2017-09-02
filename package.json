@@ -1,12 +1,15 @@
 {
   "name": "humane-society--scraper",
   "version": "1.0.0",
-  "description": "Scrape the Oregon Humane Society's results pages for data about adoptable animals.",
+  "description":
+    "Scrape the Oregon Humane Society's results pages for data about adoptable animals.",
   "main": "src/index.js",
   "scripts": {
     "coverage": "nyc npm test",
     "dev": "concurrently \"npm run watch\" \"npm test -- --watch\"",
     "lint": "eslint --fix ./src ./test",
+    "precommit":
+      "npm run lint && git add -A && git commit --amend --no-edit --no-verify",
     "start": "micro",
     "test": "ava",
     "watch": "nodemon --watch . --exec \"npm run start\""
@@ -28,6 +31,7 @@
     "codecov": "2.3.0",
     "concurrently": "3.5.0",
     "eslint": "4.6.0",
+    "husky": "0.14.3",
     "nodemon": "1.11.0",
     "nyc": "11.1.0",
     "prettier": "1.6.1"
