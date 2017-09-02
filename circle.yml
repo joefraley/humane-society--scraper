@@ -4,4 +4,5 @@ machine:
 
 test:
   post:
+    - "npm run coverage"
     - "nyc report --reporter=lcov > coverage.lcov && codecov"
