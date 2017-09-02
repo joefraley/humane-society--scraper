@@ -4,10 +4,11 @@
   "description": "Scrape the Oregon Humane Society's results pages for data about adoptable animals.",
   "main": "src/index.js",
   "scripts": {
-    "dev": "concurrently \"npm run watch\" \"npm test --watch\"",
+    "coverage": "nyc npm test",
+    "dev": "concurrently \"npm run watch\" \"npm test -- --watch\"",
     "start": "micro",
-    "test": "nyc ava",
-    "watch": "nodemon --watch src/ --exec \"npm run start\""
+    "test": "ava",
+    "watch": "nodemon --watch . --exec \"npm run start\""
   },
   "keywords": [],
   "author": "Joseph Fraley",
@@ -21,8 +22,8 @@
   },
   "devDependencies": {
     "ava": "0.22.0",
-    "chokidar": "1.7.0",
     "codecov": "2.3.0",
+    "concurrently": "3.5.0",
     "eslint": "4.5.0",
     "nodemon": "1.11.0",
     "nyc": "11.1.0"
