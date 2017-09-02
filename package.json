@@ -23,7 +23,7 @@
     "ramda": "0.24.1"
   },
   "devDependencies": {
-    "@joefraley/eslint-config": "0.0.1",
+    "@joefraley/eslint-config": "0.0.2",
     "ava": "0.22.0",
     "babel-eslint": "7.2.3",
     "codecov": "2.3.0",
