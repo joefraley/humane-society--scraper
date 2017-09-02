@@ -2,8 +2,10 @@
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/joefraley/humane-society--scraper/master.svg)](https://circleci.com/gh/joefraley/humane-society--scraper)
  [![codecov](https://codecov.io/gh/joefraley/humane-society--scraper/branch/master/graph/badge.svg)](https://codecov.io/gh/joefraley/humane-society--scraper)
- [![bitHound](https://img.shields.io/bithound/code/github/joefraley/humane-society--scraper.svg)](https://www.bithound.io/github/joefraley/humane-society--scraper) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-
+ [![bitHound](https://img.shields.io/bithound/code/github/joefraley/humane-society--scraper.svg)](https://www.bithound.io/github/joefraley/humane-society--scraper)
+ [![bitHound Dependencies](https://www.bithound.io/github/joefraley/humane-society--scraper/badges/dependencies.svg)](https://www.bithound.io/github/joefraley/humane-society--scraper/master/dependencies/npm)
+ [![bitHound Dev Dependencies](https://www.bithound.io/github/joefraley/humane-society--scraper/badges/devDependencies.svg)](https://www.bithound.io/github/joefraley/humane-society--scraper/master/dependencies/npm)
+ [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 Scrape the Oregon Humane Society's results pages for data about adoptable animals.
 
