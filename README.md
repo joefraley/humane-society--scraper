@@ -1,7 +1,8 @@
 # Humane Society Scraper
 
-[![CircleCI](https://circleci.com/gh/joefraley/humane-society--scraper.svg?style=svg)](https://circleci.com/gh/joefraley/humane-society--scraper)
- [![codecov](https://codecov.io/gh/joefraley/humane-society--scraper/branch/master/graph/badge.svg)](https://codecov.io/gh/joefraley/humane-society--scraper)
+[![CircleCI branch](https://img.shields.io/circleci/project/github/joefraley/humane-society--scraper/master.svg)](https://circleci.com/gh/joefraley/humane-society--scraper)
+ [![Codecov branch](https://img.shields.io/codecov/c/github/joefraley/humane-society--scraper/branch/master.svg)](https://codecov.io/gh/joefraley/humane-society--scraper)
+ [![bitHound](https://img.shields.io/bithound/code/github/joefraley/humane-society--scraper.svg)](https://www.bithound.io/github/joefraley/humane-society--scraper)
 
 Scrape the Oregon Humane Society's results pages for data about adoptable animals.
 
