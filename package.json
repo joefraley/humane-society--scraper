@@ -6,6 +6,7 @@
   "scripts": {
     "coverage": "nyc npm test",
     "dev": "concurrently \"npm run watch\" \"npm test -- --watch\"",
+    "lint": "eslint --fix ./src ./test",
     "start": "micro",
     "test": "ava",
     "watch": "nodemon --watch . --exec \"npm run start\""
@@ -21,11 +22,14 @@
     "ramda": "0.24.1"
   },
   "devDependencies": {
+    "@joefraley/eslint-config": "0.0.1",
     "ava": "0.22.0",
+    "babel-eslint": "7.2.3",
     "codecov": "2.3.0",
     "concurrently": "3.5.0",
-    "eslint": "4.5.0",
+    "eslint": "4.6.0",
     "nodemon": "1.11.0",
-    "nyc": "11.1.0"
+    "nyc": "11.1.0",
+    "prettier": "1.6.1"
   }
 }
