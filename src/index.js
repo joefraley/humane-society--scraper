@@ -1,5 +1,3 @@
-// @flow
-
 const { get } = require("axios");
 const cheerio = require("cheerio");
 const { compose, toLower } = require("ramda");
@@ -42,13 +40,13 @@ module.exports = async () => {
     .find(selectors.TABLE)
     .children()
     .toArray();
-  const parseDetail = toLower(index =>
+  const parseDetail = compose(toLower, index =>
     $$(table[index])
       .find("td")
       .text()
   );
 
-  return {
+  const result = {
     adoptFee: compose(parseCurrency, parseDetail)(1),
     age: compose(parseAge, parseDetail)(6),
     animalType: parseDetail(2),
@@ -64,4 +62,6 @@ module.exports = async () => {
     sex: parseDetail(4),
     weight: compose(parseWeight, parseDetail)(7)
   };
+
+  return await JSON.stringify(result);
 };
