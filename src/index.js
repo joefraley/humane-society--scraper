@@ -1,6 +1,14 @@
 const { get } = require("axios");
 const cheerio = require("cheerio");
-const { compose, map, take, toLower } = require("ramda");
+const {
+  complement,
+  compose,
+  isNil,
+  map,
+  pickBy,
+  take,
+  toLower
+} = require("ramda");
 const parseAnimalFrom = require("./utils");
 const { parse } = require("url");
 
@@ -33,7 +41,7 @@ const parseDetail = async detailUrl => {
       .text()
   );
 
-  const raw = {
+  const raw = pickBy(complement(isNil), {
     adoptFee: parseDetail(1),
     age: parseDetail(6),
     animalType: parseDetail(2),
@@ -48,7 +56,7 @@ const parseDetail = async detailUrl => {
     name: stats.find("h2").text(),
     sex: parseDetail(4),
     weight: parseDetail(7)
-  };
+  });
 
   return parseAnimalFrom(Date.now())(raw);
 };
