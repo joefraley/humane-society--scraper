@@ -30,32 +30,32 @@ const parseDetail = async detailUrl => {
   const details = $$(selectors.DETAILS);
   const stats = details.find(selectors.STATS);
 
-  const table = stats
-    .find(selectors.TABLE)
-    .children()
-    .toArray();
+  const table = stats.find(selectors.TABLE).children();
 
-  const parseDetail = compose(toLower, index =>
-    $$(table[index])
-      .find("td")
+  const parseDetail = compose(toLower, key =>
+    $$(table)
+      .find(`th:contains("${key}")`)
+      .siblings("td")
+      .first()
       .text()
+      .trim()
   );
 
   const raw = pickBy(complement(isNil), {
-    adoptFee: parseDetail(1),
-    age: parseDetail(6),
-    animalType: parseDetail(2),
-    breed: parseDetail(3),
-    color: parseDetail(5),
-    dateAvailable: parseDetail(0),
+    adoptFee: parseDetail("Adopt Fee"),
+    age: parseDetail("Age"),
+    animalType: parseDetail("Type"),
+    breed: parseDetail("Breed"),
+    color: parseDetail("Color"),
+    dateAvailable: parseDetail("Date Available"),
     description: details.find(selectors.DESCRIPTION).text(),
-    id: parseDetail(10),
+    id: parseDetail("Code #"),
     imageUrl: details.find(selectors.IMAGE_URL).attr("src"),
-    kennel: parseDetail(9),
-    location: parseDetail(8),
+    kennel: parseDetail("Kennel"),
+    location: parseDetail("Location"),
     name: stats.find("h2").text(),
-    sex: parseDetail(4),
-    weight: parseDetail(7)
+    sex: parseDetail("Sex"),
+    weight: parseDetail("Weight")
   });
 
   return parseAnimalFrom(Date.now())(raw);
