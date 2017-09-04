@@ -20,7 +20,8 @@
     "cheerio": "1.0.0-rc.2",
     "date-fns": "1.28.5",
     "micro": "8.0.4",
-    "ramda": "0.24.1"
+    "ramda": "0.24.1",
+    "tcomb": "3.2.23"
   },
   "devDependencies": {
     "@joefraley/eslint-config": "0.0.2",
