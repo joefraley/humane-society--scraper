@@ -1,7 +1,8 @@
 const { get } = require("axios");
 const cheerio = require("cheerio");
-const { compose, map, toLower } = require("ramda");
+const { compose, map, take, toLower } = require("ramda");
 const parseAnimalFrom = require("./utils");
+const { parse } = require("url");
 
 const BASE_URL = "https://www.oregonhumane.org";
 const ALL_ANIMALS_URL = `${BASE_URL}/adopt?type=all`;
@@ -52,14 +53,19 @@ const parseDetail = async detailUrl => {
   return parseAnimalFrom(Date.now())(raw);
 };
 
-module.exports = async () => {
+module.exports = async req => {
   const { data } = await get(ALL_ANIMALS_URL);
   const $ = cheerio.load(data);
+
   const urls = $(selectors.ANIMAL_LINK)
     .map((i, e) => $(e).attr("href"))
-    .toArray()[0];
+    .toArray();
 
-  const results = await Promise.all(map(parseDetail, [urls])); // eslint-disable-line no-undef
+  const { query: { count = urls.length } } = parse(req.url, true);
+
+  const needed = take(count, urls);
+
+  const results = await Promise.all(map(parseDetail, needed)); // eslint-disable-line no-undef
 
   return await JSON.stringify(results);
 };

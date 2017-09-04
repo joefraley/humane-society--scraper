@@ -8,7 +8,7 @@ import rp from "request-promise";
 import test from "ava";
 
 const request = options =>
-  rp(merge({ resolveWithFullResponse: true }, options));
+  rp(merge({ resolveWithFullResponse: true, json: true }, options));
 
 test.beforeEach(spec => (spec.context.service = micro(main)));
 
@@ -16,8 +16,20 @@ test.afterEach(spec => spec.context.service.close());
 
 test("server:/:GET - sends back a list of animals", async assert => {
   const uri = await listen(assert.context.service);
-  const response = await request({ uri });
-  const result = JSON.parse(response.body);
-  assert.is(response.statusCode, 200);
-  assert.notThrows(() => list(Animal)(result));
+  const { body, statusCode } = await request({
+    uri,
+    qs: { count: 1 }
+  });
+  assert.is(statusCode, 200);
+  assert.notThrows(() => list(Animal)(body));
+});
+
+test("server:/:GET - respects the desired count", async assert => {
+  const uri = await listen(assert.context.service);
+  const { body, statusCode } = await request({
+    uri,
+    qs: { count: 1 }
+  });
+  assert.false(body.length > 1);
+  assert.is(statusCode, 200);
 });
