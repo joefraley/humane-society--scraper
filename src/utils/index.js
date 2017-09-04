@@ -53,7 +53,7 @@ module.exports = (date = Date.now()) =>
     animalType: compose(toLower, identity),
     breed: compose(toLower, identity),
     color: compose(map(trim), split(","), toLower),
-    dateAvailable: d => new Date(parseDate(d)),
+    dateAvailable: compose(getTime, parseDate),
     description: trim,
     id: identity,
     imageUrl: identity,

@@ -9,7 +9,7 @@ module.exports = {
       animalType: type.String,
       breed: type.String,
       color: list(type.String),
-      dateAvailable: type.Any,
+      dateAvailable: type.Number,
       description: type.String,
       id: type.String,
       imageUrl: type.String,
