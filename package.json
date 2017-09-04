@@ -1,8 +1,7 @@
 {
   "name": "humane-society--scraper",
-  "version": "0.0.0",
-  "description":
-    "Scrape the Oregon Humane Society's results pages for data about adoptable animals.",
+  "version": "0.1.0",
+  "description": "Scrape the Oregon Humane Society's results pages for data about adoptable animals.",
   "main": "src/index.js",
   "scripts": {
     "coverage": "nyc npm test",
