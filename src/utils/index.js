@@ -1,19 +1,19 @@
 const parseDate = require("date-fns/parse");
 const {
   always,
+  complement,
   compose,
   dec,
-  either,
+  defaultTo,
   equals,
   evolve,
   findIndex,
   head,
   identity,
-  ifElse,
-  isEmpty,
   isNil,
   map,
   nth,
+  pickBy,
   replace,
   split,
   toLower,
@@ -47,24 +47,22 @@ const parseAgeFrom = today =>
   }, split(" "));
 
 module.exports = (date = Date.now()) =>
-  evolve({
-    adoptFee: compose(parseFloat, dropNonNumbers),
-    age: parseAgeFrom(date),
-    animalType: compose(toLower, identity),
-    breed: compose(toLower, identity),
-    color: compose(map(trim), split(","), toLower),
-    dateAvailable: compose(getTime, parseDate),
-    description: trim,
-    id: identity,
-    imageUrl: identity,
-    kennel: compose(toLower, identity),
-    location: compose(toLower, identity),
-    name: identity,
-    sex: compose(
-      ifElse(either(isEmpty, isNil), always("NA"), toUpper),
-      head,
-      split(""),
-      ifElse(isNil, always(""), identity)
-    ),
-    weight: string => parseFloat(string) || 0
-  });
+  compose(
+    pickBy(complement(isNil)),
+    evolve({
+      adoptFee: compose(parseFloat, dropNonNumbers),
+      age: parseAgeFrom(date),
+      animalType: toLower,
+      breed: toLower,
+      color: compose(map(trim), split(","), toLower),
+      dateAvailable: compose(getTime, parseDate),
+      description: trim,
+      id: identity,
+      imageUrl: identity,
+      kennel: toUpper,
+      location: toLower,
+      name: identity,
+      sex: compose(head, split(""), toUpper, defaultTo("")),
+      weight: parseFloat
+    })
+  );

@@ -4,20 +4,20 @@ const { maybe, list, enums, struct } = type;
 module.exports = {
   Animal: struct(
     {
-      adoptFee: type.Number,
-      age: type.Number,
-      animalType: type.String,
-      breed: type.String,
-      color: list(type.String),
-      dateAvailable: type.Number,
-      description: type.String,
-      id: type.String,
-      imageUrl: type.String,
+      adoptFee: maybe(type.Number),
+      age: maybe(type.Number),
+      animalType: maybe(type.String),
+      breed: maybe(type.String),
+      color: maybe(list(type.String)),
+      dateAvailable: maybe(type.Number),
+      description: maybe(type.String),
+      id: maybe(type.String),
+      imageUrl: maybe(type.String),
       kennel: maybe(type.String),
       location: maybe(type.String),
-      name: type.String,
-      sex: enums.of("NA M F", "sex"),
-      weight: type.Number
+      name: maybe(type.String),
+      sex: maybe(enums.of("M F", "sex")),
+      weight: maybe(type.Number)
     },
     "Animal"
   )
