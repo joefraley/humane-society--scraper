@@ -1,6 +1,6 @@
 {
   "automerge": "minor",
   "commitMessage":
-    "ci(ALL): update dependency {{depName}} to version {{newVersion}}",
+    "update dependency {{depName}} to version {{newVersion}}",
   "extends": [":library"]
 }
