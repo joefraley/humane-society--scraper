@@ -27,7 +27,7 @@
     "tcomb": "3.2.23"
   },
   "devDependencies": {
-    "@joefraley/eslint-config": "0.0.2",
+    "@joefraley/eslint-config": "1.0.0",
     "ava": "0.22.0",
     "babel-eslint": "7.2.3",
     "codecov": "2.3.0",
