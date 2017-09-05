@@ -1,6 +1,7 @@
 {
   "automerge": "minor",
-  "commitMessage":
-    "update dependency {{depName}} to version {{newVersion}}",
+  "automergeType": "branch-push",
+  "rebaseStalePrs": true,
+  "semanticCommits": true,
   "extends": [":library"]
 }
