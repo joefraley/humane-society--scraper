@@ -42,6 +42,7 @@
     "dev-null": "0.1.1",
     "eslint": "4.6.1",
     "husky": "0.14.3",
+    "micro-cors": "0.0.4",
     "nodemon": "1.12.0",
     "nyc": "11.1.0",
     "prettier": "1.6.1",

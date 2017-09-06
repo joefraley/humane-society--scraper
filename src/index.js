@@ -14,6 +14,7 @@ const {
 const parseAnimalFrom = require("./utils");
 const { parse } = require("url");
 const log = require("./logging");
+const cors = require("micro-cors")();
 
 const BASE_URL = "https://www.oregonhumane.org";
 const ALL_ANIMALS_URL = `${BASE_URL}/adopt?type=all`;
@@ -76,18 +77,20 @@ const withLogging = fn => async (request, res) => {
   }
 };
 
-module.exports = withLogging(async req => {
-  const { data } = await get(ALL_ANIMALS_URL);
-  const $ = cheerio.load(data);
+module.exports = cors(
+  withLogging(async req => {
+    const { data } = await get(ALL_ANIMALS_URL);
+    const $ = cheerio.load(data);
 
-  const urls = $(selectors.ANIMAL_LINK)
-    .map((i, e) => $(e).attr("href"))
-    .toArray();
+    const urls = $(selectors.ANIMAL_LINK)
+      .map((i, e) => $(e).attr("href"))
+      .toArray();
 
-  const { query: { count = urls.length } } = parse(req.url, true);
+    const { query: { count = urls.length } } = parse(req.url, true);
 
-  const needed = take(count, urls);
+    const needed = take(count, urls);
 
-  const results = await Promise.all(map(parseDetail, needed));
-  return await JSON.stringify(results);
-});
+    const results = await Promise.all(map(parseDetail, needed));
+    return await JSON.stringify(results);
+  })
+);
