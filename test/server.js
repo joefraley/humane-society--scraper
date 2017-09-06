@@ -14,7 +14,7 @@ test.beforeEach(spec => (spec.context.service = micro(main)));
 
 test.afterEach(spec => spec.context.service.close());
 
-test("server:/:GET - sends back a list of animals", async assert => {
+test("GET: / - sends back a list of animals", async assert => {
   const uri = await listen(assert.context.service);
   const { body, statusCode } = await request({
     uri,
@@ -24,7 +24,7 @@ test("server:/:GET - sends back a list of animals", async assert => {
   assert.notThrows(() => list(Animal)(body));
 });
 
-test("server:/:GET - respects the desired count", async assert => {
+test("GET: / - respects the desired count", async assert => {
   const uri = await listen(assert.context.service);
   const { body, statusCode } = await request({
     uri,

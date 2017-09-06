@@ -4,7 +4,7 @@ import data from "../fixtures";
 import test from "ava";
 import { compose, omit, keys, __, has } from "ramda";
 
-test("parseAnimalFrom", assert => {
+test("returns a vaild animal", assert => {
   const testDate = new Date("01/01/2000");
   const animal = data();
 
@@ -13,7 +13,7 @@ test("parseAnimalFrom", assert => {
   assert.notThrows(() => Animal(actual));
 });
 
-test("parseAnimalFrom - omits all nil fields", assert => {
+test("omits all nil fields", assert => {
   const testDate = new Date("01/01/2000");
   const _default = data();
   const animal = compose(omit(__, _default), keys)(_default);
@@ -24,7 +24,7 @@ test("parseAnimalFrom - omits all nil fields", assert => {
   assert.deepEqual(actual, expected);
 });
 
-test("parseAnimalFrom - omits any single nil fields", assert => {
+test("omits any single nil fields", assert => {
   const testDate = new Date("01/01/2000");
   const animal = omit(["age"], data());
 
