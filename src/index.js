@@ -5,6 +5,8 @@ const cheerio = require("cheerio");
 const {
   complement,
   compose,
+  curry,
+  flip,
   isNil,
   map,
   pickBy,
@@ -79,23 +81,21 @@ const withLogging = fn => async (request, res) => {
   }
 };
 
-module.exports = visualize(
-  cors(
-    withLogging(async req => {
-      const { data } = await get(ALL_ANIMALS_URL);
-      const $ = cheerio.load(data);
+const prettify = compose(curry, flip)(visualize)(config.NODE_ENV);
 
-      const urls = $(selectors.ANIMAL_LINK)
-        .map((i, e) => $(e).attr("href"))
-        .toArray();
+module.exports = compose(withLogging, cors, prettify)(async (...args) => {
+  const [req, res] = args; // eslint-disable-line no-unused-vars
+  const { data } = await get(ALL_ANIMALS_URL);
+  const $ = cheerio.load(data);
 
-      const { query: { count = urls.length } } = parse(req.url, true);
+  const urls = $(selectors.ANIMAL_LINK)
+    .map((i, anchor) => $(anchor).attr("href"))
+    .toArray();
 
-      const needed = take(count, urls);
+  const { query: { count = urls.length } } = parse(req.url, true);
 
-      const results = await Promise.all(map(parseDetail, needed));
-      return await JSON.stringify(results);
-    })
-  ),
-  config.NODE_ENV
-);
+  const needed = take(count, urls);
+
+  const results = await Promise.all(map(parseDetail, needed));
+  return await JSON.stringify(results);
+});

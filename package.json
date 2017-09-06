@@ -12,10 +12,10 @@
   "scripts": {
     "commit": "git-cz",
     "coverage": "nyc npm test",
-    "dev": "NODE_ENV=dev nodemon --watch . --exec \"npm run start\"",
+    "dev": "NODE_ENV=dev nodemon --watch . --exec \"micro\"",
     "lint": "eslint --fix ./src ./test",
     "precommit": "npm run lint && git add -A",
-    "start": "micro",
+    "start": "NODE_ENV=production micro",
     "release": "standard-version --no-verify && git push --follow-tags",
     "test": "NODE_ENV=test ava"
   },
