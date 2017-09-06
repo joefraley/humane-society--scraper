@@ -16,7 +16,8 @@ const isTest = env("test");
 
 const production = evolve({
   envName: defaultTo("production"),
-  ip: always("0.0.0.0")
+  ip: always("0.0.0.0"),
+  logLevel: "debug"
 });
 
 const testing = evolve({
@@ -32,7 +33,7 @@ const makeConfig = cond([
 module.exports = makeConfig({
   appVersion: pack.version,
   ip: "127.0.0.1",
-  logLevel: process.env.LOG_LEVEL || "debug",
+  logLevel: process.env.LOG_LEVEL || "error",
   logStream: process.stdout,
   NODE_ENV: process.env.NODE_ENV || "production",
   nodeVersion: pack.engines.node,
