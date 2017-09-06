@@ -16,10 +16,11 @@ const {
 const parseAnimalFrom = require("./utils");
 const { parse } = require("url");
 const log = require("./logging");
-const cors = require("micro-cors")();
+const cors = require("micro-cors");
 const visualize = require("micro-visualize");
 const config = require("config3");
 
+const SERVICE_TIMEOUT = 5000;
 const BASE_URL = "https://www.oregonhumane.org";
 const ALL_ANIMALS_URL = `${BASE_URL}/adopt?type=all`;
 
@@ -81,9 +82,19 @@ const withLogging = fn => async (request, res) => {
   }
 };
 
+const withTimeout = milliseconds => fn => async (request, response) => {
+  response.setTimeout(milliseconds);
+  return await fn(request, response);
+};
+
 const prettify = compose(curry, flip)(visualize)(config.NODE_ENV);
 
-module.exports = compose(withLogging, cors, prettify)(async (...args) => {
+module.exports = compose(
+  prettify,
+  withLogging,
+  cors({ allowMethods: ["GET"] }),
+  withTimeout(SERVICE_TIMEOUT)
+)(async (...args) => {
   const [req, res] = args; // eslint-disable-line no-unused-vars
   const { data } = await get(ALL_ANIMALS_URL);
   const $ = cheerio.load(data);
