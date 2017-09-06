@@ -1,10 +1,10 @@
 const parseDate = require("date-fns/parse");
+const R = require("ramda");
 const {
   always,
   complement,
   compose,
   dec,
-  defaultTo,
   equals,
   evolve,
   findIndex,
@@ -20,7 +20,9 @@ const {
   toUpper,
   trim,
   tryCatch
-} = require("ramda");
+} = R;
+const S = require("sanctuary");
+const { Nothing, Just, Left, Right, Maybe } = S;
 const setYear = require("date-fns/set_year");
 const setMonth = require("date-fns/set_month");
 const getYear = require("date-fns/get_year");
@@ -50,19 +52,19 @@ module.exports = (date = Date.now()) =>
   compose(
     pickBy(complement(isNil)),
     evolve({
-      adoptFee: compose(parseFloat, dropNonNumbers),
+      adoptFee: S.compose(S.parseFloat, dropNonNumbers),
       age: parseAgeFrom(date),
-      animalType: toLower,
-      breed: toLower,
-      color: compose(map(trim), split(","), toLower),
-      dateAvailable: compose(getTime, parseDate),
-      description: trim,
-      id: identity,
-      imageUrl: identity,
-      kennel: toUpper,
-      location: toLower,
-      name: identity,
-      sex: compose(head, split(""), toUpper, defaultTo("")),
-      weight: parseFloat
+      animalType: S.toLower,
+      breed: S.toLower,
+      color: R.compose(S.map(S.trim), S.splitOn(","), S.toLower),
+      dateAvailable: S.compose(getTime, parseDate),
+      description: S.trim,
+      id: R.identity,
+      imageUrl: R.identity,
+      kennel: S.toUpper,
+      location: S.toLower,
+      name: R.identity,
+      sex: R.compose(S.head, S.splitOn(""), S.toUpper),
+      weight: S.parseFloat
     })
   );
