@@ -1,8 +1,9 @@
-const bole = require("bole");
-const pack = require("../../package");
-const config = require("config3");
+const logger = require("./logger");
+const prettyLogging = require("./pretty-logging");
+const withLogging = require("./with-logging");
 
-module.exports = bole.output({
-  level: config.logLevel,
-  stream: config.logStream
-})(pack.name);
+module.exports = {
+  logger,
+  prettyLogging,
+  withLogging
+};

@@ -10,9 +10,9 @@ const {
   T
 } = require("ramda");
 
-const env = propEq("NODE_ENV");
-const isProduction = env("production");
-const isTest = env("test");
+const envIs = propEq("NODE_ENV");
+const isProduction = envIs("production");
+const isTest = envIs("test");
 
 const production = evolve({
   envName: defaultTo("production"),
@@ -21,7 +21,11 @@ const production = evolve({
 });
 
 const testing = evolve({
-  logStream: always(devNull())
+  logStream: always(devNull()),
+  proxy: {
+    host: "127.0.0.1",
+    port: 8888
+  }
 });
 
 const makeConfig = cond([
@@ -32,6 +36,8 @@ const makeConfig = cond([
 
 module.exports = makeConfig({
   appVersion: pack.version,
+  baseUrl: "http://www.oregonhumane.org",
+  proxy: false,
   ip: "127.0.0.1",
   logLevel: process.env.LOG_LEVEL || "error",
   logStream: process.stdout,

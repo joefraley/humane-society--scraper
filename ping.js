@@ -3,7 +3,7 @@
 /* eslint no-console: 0 */
 
 // use this file to do a quick ping during development
-// e.g. $ node test/ping.js
+// e.g. $ node ping.js
 const { get } = require("axios");
 const config = require("config3");
 
