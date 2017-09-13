@@ -1,34 +1,36 @@
-import { Animal } from "../../src/schema";
 import parseAnimalFrom from "../../src/utils";
 import data from "../fixtures";
 import test from "ava";
-import { compose, omit, keys, __, has } from "ramda";
+import R from "ramda";
+import S from "sanctuary";
+
+const testDate = new Date("01/01/2000");
+const parseAnimal = parseAnimalFrom(testDate);
 
 test("returns a vaild animal", assert => {
-  const testDate = new Date("01/01/2000");
-  const animal = data();
+  const testAnimal = R.map(S.toMaybe, data());
+  const results = parseAnimal(testAnimal);
 
-  const actual = parseAnimalFrom(testDate)(animal);
-
-  assert.notThrows(() => Animal(actual));
-});
-
-test("omits all nil fields", assert => {
-  const testDate = new Date("01/01/2000");
-  const _default = data();
-  const animal = compose(omit(__, _default), keys)(_default);
-
-  const actual = parseAnimalFrom(testDate)(animal);
-  const expected = {};
+  const expected = S.keys(data());
+  const actual = S.keys(results);
 
   assert.deepEqual(actual, expected);
 });
 
-test("omits any single nil fields", assert => {
-  const testDate = new Date("01/01/2000");
-  const animal = omit(["age"], data());
+test("does not omit Just(value)'s", assert => {
+  const noAge = R.omit(["age"]);
+  const animal = noAge(data());
+  const actual = parseAnimal(animal);
+});
 
-  const actual = parseAnimalFrom(testDate)(animal);
+test("omits all Nothing's", assert => {
+  const animal = S.map(R.always(S.Nothing), data({}));
+  const actual = parseAnimal(animal);
+  const expected = {};
+});
 
-  assert.false(has("age", actual));
+test("omits any Nothing", assert => {
+  const noAge = R.omit(["age"]);
+  const animal = noAge(data());
+  const actual = parseAnimal(animal);
 });

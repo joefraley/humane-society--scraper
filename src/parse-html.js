@@ -1,8 +1,9 @@
-const { complement, compose, isNil, pickBy, toLower } = require("ramda");
+const { compose } = require("ramda");
 const { get } = require("./network");
 const constants = require("./constants");
 const cheerio = require("cheerio");
 const parseAnimalFrom = require("./utils");
+const S = require("sanctuary");
 
 const detailPage = async detailUrl => {
   const { data } = await get(`${detailUrl}`);
@@ -12,7 +13,7 @@ const detailPage = async detailUrl => {
 
   const table = stats.find(constants.selectors.TABLE).children();
 
-  const parseDetail = compose(toLower, key =>
+  const parseDetail = S.compose(S.of(S.Maybe), key =>
     $$(table)
       .find(`th:contains("${key}")`)
       .siblings("td")
@@ -21,7 +22,7 @@ const detailPage = async detailUrl => {
       .trim()
   );
 
-  const raw = pickBy(complement(isNil), {
+  const raw = {
     adoptFee: parseDetail("Adopt Fee"),
     age: parseDetail("Age"),
     animalType: parseDetail("Type"),
@@ -36,7 +37,7 @@ const detailPage = async detailUrl => {
     name: stats.find("h2").text(),
     sex: parseDetail("Sex"),
     weight: parseDetail("Weight")
-  });
+  };
 
   return parseAnimalFrom(Date.now())(raw);
 };

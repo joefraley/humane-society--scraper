@@ -1,4 +1,3 @@
-import { Animal } from "../src/schema";
 import { get } from "axios";
 import { list } from "tcomb";
 import listen from "test-listen";

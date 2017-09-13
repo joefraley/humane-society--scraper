@@ -1,35 +1,26 @@
+const getMonth = require("date-fns/get_month");
+const getTime = require("date-fns/get_time");
+const getYear = require("date-fns/get_year");
 const parseDate = require("date-fns/parse");
 const R = require("ramda");
+const S = require("sanctuary");
+const setMonth = require("date-fns/set_month");
+const setYear = require("date-fns/set_year");
+
 const {
   always,
-  complement,
   compose,
   dec,
   equals,
   evolve,
   findIndex,
-  head,
-  identity,
-  isNil,
-  map,
   nth,
-  pickBy,
-  replace,
   split,
-  toLower,
-  toUpper,
-  trim,
   tryCatch
 } = R;
-const S = require("sanctuary");
-const { Nothing, Just, Left, Right, Maybe } = S;
-const setYear = require("date-fns/set_year");
-const setMonth = require("date-fns/set_month");
-const getYear = require("date-fns/get_year");
-const getMonth = require("date-fns/get_month");
-const getTime = require("date-fns/get_time");
 
-const dropNonNumbers = replace(/[^0-9\.]+/g, ""); // eslint-disable-line no-useless-escape
+const dropNonNumbers = R.replace(/[^0-9\.]+/g, ""); // eslint-disable-line no-useless-escape
+const parseAdoptFee = R.compose(S.parseFloat, dropNonNumbers);
 
 const parseAgeFrom = today =>
   compose(list => {
@@ -48,23 +39,26 @@ const parseAgeFrom = today =>
     return result;
   }, split(" "));
 
+const parseColor = R.compose(S.map(S.trim), S.splitOn(","), S.toLower);
+
 module.exports = (date = Date.now()) =>
-  compose(
-    pickBy(complement(isNil)),
+  R.compose(
+    R.map(S.join),
+    R.pickBy(x => S.isJust(x)),
     evolve({
-      adoptFee: S.compose(S.parseFloat, dropNonNumbers),
-      age: parseAgeFrom(date),
-      animalType: S.toLower,
-      breed: S.toLower,
-      color: R.compose(S.map(S.trim), S.splitOn(","), S.toLower),
-      dateAvailable: S.compose(getTime, parseDate),
-      description: S.trim,
+      adoptFee: S.map(parseAdoptFee),
+      age: S.map(x => S.Nothing(x)),
+      animalType: S.map(S.toLower),
+      breed: S.map(S.toLower),
+      color: S.map(parseColor),
+      dateAvailable: S.map(R.compose(getTime, parseDate)),
+      description: S.map(S.trim),
       id: R.identity,
       imageUrl: R.identity,
-      kennel: S.toUpper,
-      location: S.toLower,
+      kennel: S.map(S.toUpper),
+      location: R.identity,
       name: R.identity,
-      sex: R.compose(S.head, S.splitOn(""), S.toUpper),
-      weight: S.parseFloat
+      sex: S.map(R.compose(S.head, S.splitOn(""), S.toUpper)),
+      weight: S.map(S.parseFloat)
     })
   );
