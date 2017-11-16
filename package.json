@@ -39,7 +39,7 @@
     "commitizen": "2.9.6",
     "concurrently": "3.5.0",
     "config3": "1.0.3",
-    "cz-conventional-changelog": "2.0.0",
+    "cz-conventional-changelog": "2.1.0",
     "dev-null": "0.1.1",
     "eslint": "4.6.1",
     "husky": "0.14.3",
