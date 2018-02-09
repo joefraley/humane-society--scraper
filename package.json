@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@joefraley/eslint-config": "1.0.0",
-    "ava": "0.22.0",
+    "ava": "0.25.0",
     "babel-eslint": "7.2.3",
     "bole": "3.0.2",
     "codecov": "2.3.0",
