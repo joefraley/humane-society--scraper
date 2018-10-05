@@ -43,7 +43,7 @@
     "dev-null": "0.1.1",
     "eslint": "4.6.1",
     "husky": "0.14.3",
-    "micro-cors": "0.0.4",
+    "micro-cors": "0.1.1",
     "micro-visualize": "3.0.1",
     "nodemon": "1.12.0",
     "nyc": "11.2.1",
