@@ -28,7 +28,7 @@
     "micro": "8.0.4",
     "ramda": "0.24.1",
     "sanctuary": "0.13.2",
-    "tcomb": "3.2.23"
+    "tcomb": "3.2.29"
   },
   "devDependencies": {
     "@joefraley/eslint-config": "1.0.0",
