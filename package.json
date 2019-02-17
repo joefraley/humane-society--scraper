@@ -27,7 +27,7 @@
     "date-fns": "1.28.5",
     "micro": "8.0.4",
     "ramda": "0.24.1",
-    "sanctuary": "0.13.2",
+    "sanctuary": "0.15.1",
     "tcomb": "3.2.23"
   },
   "devDependencies": {
