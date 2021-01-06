@@ -22,7 +22,7 @@
   "author": "Joseph Fraley",
   "license": "MIT",
   "dependencies": {
-    "axios": "0.16.2",
+    "axios": "0.21.1",
     "cheerio": "1.0.0-rc.2",
     "date-fns": "1.28.5",
     "micro": "8.0.4",
